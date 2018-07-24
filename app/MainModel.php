@@ -10,7 +10,7 @@ class MainModel extends Model
     public static function GetCategoriesModel()
     {
         try {
-            $result=DB::table('category')->get();
+            $result=DB::table('category')->orderBy('id', 'asc')->get();
             if (!empty($result)) {
                 return $result;
             }

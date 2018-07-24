@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\MainModel;
+header('Content-Type: text/html; charset=utf-8');
 
 class MainController extends Controller
 {
