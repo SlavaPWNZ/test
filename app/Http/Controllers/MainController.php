@@ -30,7 +30,11 @@ class MainController extends Controller
 
     public function auth()
     {
-        echo 'auth';
+        if (isset($_GET['login']) && $_GET['login']!='' && isset($_GET['password']) && $_GET['password']!='') {
+            $login=addslashes($_GET['login']); $password=addslashes($_GET['password']); $result = MainModel::GetAuthModel($login,$password);
+        }
+        if (!isset($result)) $result['error']="invalid args";
+        echo json_encode($result, JSON_UNESCAPED_UNICODE);
     }
 
     public function createCategory()

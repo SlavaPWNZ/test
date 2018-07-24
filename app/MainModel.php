@@ -4,9 +4,26 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Carbon\Carbon;
 
 class MainModel extends Model
 {
+
+    public function timeFormat()
+    {
+        $timestamp = time();
+        $date_time_array = getdate($timestamp);
+        $hours = $date_time_array['hours'];
+        $minutes = $date_time_array['minutes'];
+        $seconds = $date_time_array['seconds'];
+        $month = $date_time_array['mon'];
+        $day = $date_time_array['mday'];
+        $year = $date_time_array['year'];
+        $timestamp = mktime($hours-1,$minutes,$seconds,$month,$day,$year);
+        $result=strftime('%Y-%m-%d %H:%M:%S',$timestamp);
+        return $result;
+    }
+
     public static function GetCategoriesModel()
     {
         try {
@@ -58,6 +75,33 @@ class MainModel extends Model
             {
                 $result=null;
                 $result['error']="category not found";
+                return $result;
+            }
+        } catch(\Illuminate\Database\QueryException $ex){
+            $result=null;
+            $result['error']="db tables errors";
+            return $result;
+        }
+    }
+
+
+    public static function GetAuthModel($login,$password)
+    {
+        try {
+            $result1=DB::table('users')->where([['login', '=', $login],['password', '=', $password]])->get();
+            if (!empty($result1)) {
+                $time = Carbon::now();
+                $str=$login.$password.$time;
+                $token['token'] = md5($str);
+                DB::table('tokens')->insert(
+                    ['token' => $token['token'], 'date' => $time]
+                );
+                return $token;
+            }
+            else
+            {
+                $result=null;
+                $result['error']="incorrect login or password";
                 return $result;
             }
         } catch(\Illuminate\Database\QueryException $ex){
