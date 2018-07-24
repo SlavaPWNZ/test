@@ -8,22 +8,6 @@ use Carbon\Carbon;
 
 class MainModel extends Model
 {
-
-    public function timeFormat()
-    {
-        $timestamp = time();
-        $date_time_array = getdate($timestamp);
-        $hours = $date_time_array['hours'];
-        $minutes = $date_time_array['minutes'];
-        $seconds = $date_time_array['seconds'];
-        $month = $date_time_array['mon'];
-        $day = $date_time_array['mday'];
-        $year = $date_time_array['year'];
-        $timestamp = mktime($hours-1,$minutes,$seconds,$month,$day,$year);
-        $result=strftime('%Y-%m-%d %H:%M:%S',$timestamp);
-        return $result;
-    }
-
     public static function GetCategoriesModel()
     {
         try {
@@ -85,7 +69,7 @@ class MainModel extends Model
     }
 
 
-    public static function GetAuthModel($login,$password)
+    public static function AuthModel($login,$password)
     {
         try {
             $result1=DB::table('users')->where([['login', '=', $login],['password', '=', $password]])->get();
@@ -102,6 +86,40 @@ class MainModel extends Model
             {
                 $result=null;
                 $result['error']="incorrect login or password";
+                return $result;
+            }
+        } catch(\Illuminate\Database\QueryException $ex){
+            $result=null;
+            $result['error']="db tables errors";
+            return $result;
+        }
+    }
+
+    public static function CreateCategory($name_new,$token)
+    {
+        try {
+            $time = Carbon::now()->subHour();
+            $result1=DB::table('tokens')->where([['token', '=', $token],['date', '>', $time]])->get();
+            if (!empty($result1)) {
+                $result2 = DB::table('category')->where('name', '=', $name_new)->get();
+                if (empty($result2)) {
+                    DB::table('category')->insert(
+                        ['name' => $name_new]
+                    );
+                    $result=null;
+                    $result['result']="category successfully created";
+                    return $result;
+                } else
+                {
+                    $result=null;
+                    $result['error']="category with this name already created";
+                    return $result;
+                }
+            }
+            else
+            {
+                $result=null;
+                $result['error']="incorrect token or left time (1hour)";
                 return $result;
             }
         } catch(\Illuminate\Database\QueryException $ex){
