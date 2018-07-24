@@ -129,5 +129,48 @@ class MainModel extends Model
         }
     }
 
+    public static function ChangeCategory($id,$name_new,$token)
+    {
+        try {
+            $time = Carbon::now()->subHour();
+            $result1=DB::table('tokens')->where([['token', '=', $token],['date', '>', $time]])->get();
+            if (!empty($result1)) {
+                $result2 = DB::table('category')->where('id', '=', $id)->get();
+                if (!empty($result2)) {
+                    $result3 = DB::table('category')->where('name', '=', $name_new)->get();
+                    if (empty($result3)) {
+                        DB::table('category')
+                            ->where('id', '=', $id)
+                            ->update(['name' => $name_new]);
+                        $result=null;
+                        $result['result']="category successfully changed";
+                        return $result;
+                    } else
+                    {
+                        $result=null;
+                        $result['error']="category with this name already created";
+                        return $result;
+                    }
+                } else
+                {
+                    $result=null;
+                    $result['error']="category with this ID not found";
+                    return $result;
+                }
+            }
+            else
+            {
+                $result=null;
+                $result['error']="incorrect token or left time (1hour)";
+                return $result;
+            }
+        } catch(\Illuminate\Database\QueryException $ex){
+            $result=null;
+            $result['error']="db tables errors";
+            return $result;
+        }
+    }
+
+
 
 }
