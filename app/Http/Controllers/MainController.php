@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\MainModel;
-header('Content-Type: text/html; charset=utf-8');
+//header('Content-Type: text/html; charset=utf-8');
 
 class MainController extends Controller
 {
@@ -11,13 +11,13 @@ class MainController extends Controller
     {
         if (!isset($result))
             $result['error'] = "invalid args";
-        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+        return json_encode($result, JSON_UNESCAPED_UNICODE);
     }
 
     public function getCategories()
     {
         $result = MainModel::GetCategoriesModel();
-        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+        return json_encode($result, JSON_UNESCAPED_UNICODE);
     }
 
     public function getItems()
@@ -28,7 +28,7 @@ class MainController extends Controller
         }
         if (!isset($result))
             $result['error'] = "invalid args";
-        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+        return json_encode($result, JSON_UNESCAPED_UNICODE);
     }
 
     public function auth()
@@ -40,7 +40,7 @@ class MainController extends Controller
         }
         if (!isset($result))
             $result['error'] = "invalid args";
-        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+        return json_encode($result, JSON_UNESCAPED_UNICODE);
     }
 
     public function createCategory()
@@ -52,7 +52,7 @@ class MainController extends Controller
         }
         if (!isset($result))
             $result['error'] = "invalid args";
-        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+        return json_encode($result, JSON_UNESCAPED_UNICODE);
     }
 
     public function changeCategory()
@@ -65,7 +65,7 @@ class MainController extends Controller
         }
         if (!isset($result))
             $result['error'] = "invalid args";
-        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+        return json_encode($result, JSON_UNESCAPED_UNICODE);
     }
 
     public function deleteCategory()
@@ -77,7 +77,7 @@ class MainController extends Controller
         }
         if (!isset($result))
             $result['error'] = "invalid args";
-        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+        return json_encode($result, JSON_UNESCAPED_UNICODE);
     }
 
     public function createItem()
@@ -90,7 +90,7 @@ class MainController extends Controller
         }
         if (!isset($result))
             $result['error'] = "invalid args";
-        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+        return json_encode($result, JSON_UNESCAPED_UNICODE);
     }
 
     public function changeItem()
@@ -104,7 +104,7 @@ class MainController extends Controller
         }
         if (!isset($result))
             $result['error'] = "invalid args";
-        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+        return json_encode($result, JSON_UNESCAPED_UNICODE);
     }
 
     public function deleteItem()
@@ -116,7 +116,7 @@ class MainController extends Controller
         }
         if (!isset($result))
             $result['error'] = "invalid args";
-        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+        return json_encode($result, JSON_UNESCAPED_UNICODE);
     }
 
 }

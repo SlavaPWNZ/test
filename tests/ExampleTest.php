@@ -1,19 +1,45 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic functional test example.
-     *
-     * @return void
+    /*
+     * ->seeJson([
+                 'created' => true,
+             ]);
+
+
+      ->seeJsonStructure([
+                 'name',
+                 'pet' => [
+                     'name', 'age'
+                 ]
+             ]);
+
+    ->seeJsonStructure([
+                 '*' => [
+                     'id', 'name', 'email'
+                 ]
+             ]);
+
+
+    >seeJsonStructure([
+         '*' => [
+             'id', 'name', 'email', 'pets' => [
+                 '*' => [
+                     'name', 'age'
+                 ]
+             ]
+         ]
+     ]);
+
      */
-    public function testBasicExample()
+    public function testRouteIndex()
     {
-        $this->visit('/')
-             ->see('Laravel 5');
+        $response = $this->json('GET', '/');
+        $response
+            ->assertResponseStatus(200)
+            ->seeJsonEquals([
+                'error' => 'invalid args'
+            ]);
     }
 }
