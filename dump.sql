@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- Дамп данных таблицы profiru.category: ~4 rows (приблизительно)
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- Дамп данных таблицы profiru.items: ~4 rows (приблизительно)
 /*!40000 ALTER TABLE `items` DISABLE KEYS */;
@@ -52,22 +52,22 @@ REPLACE INTO `items` (`id`, `name`) VALUES
 -- Дамп структуры для таблица profiru.ratio_category_items
 CREATE TABLE IF NOT EXISTS `ratio_category_items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_category` varchar(50) DEFAULT NULL,
-  `id_item` varchar(50) DEFAULT NULL,
+  `id_category` int(11) DEFAULT NULL,
+  `id_item` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_category_id_item` (`id_category`,`id_item`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- Дамп данных таблицы profiru.ratio_category_items: ~7 rows (приблизительно)
 /*!40000 ALTER TABLE `ratio_category_items` DISABLE KEYS */;
 REPLACE INTO `ratio_category_items` (`id`, `id_category`, `id_item`) VALUES
-	(6, '1', '4'),
-	(1, '2', '1'),
-	(7, '2', '4'),
-	(2, '3', '1'),
-	(3, '3', '2'),
-	(4, '3', '3'),
-	(5, '4', '3');
+	(6, 1, 4),
+	(1, 2, 1),
+	(7, 2, 4),
+	(2, 3, 1),
+	(3, 3, 2),
+	(4, 3, 3),
+	(5, 4, 3);
 /*!40000 ALTER TABLE `ratio_category_items` ENABLE KEYS */;
 
 -- Дамп структуры для таблица profiru.tokens
@@ -95,13 +95,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(50) DEFAULT '',
   UNIQUE KEY `id` (`id`),
   UNIQUE KEY `login` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы profiru.users: ~2 rows (приблизительно)
+-- Дамп данных таблицы profiru.users: ~5 rows (приблизительно)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 REPLACE INTO `users` (`id`, `login`, `password`) VALUES
 	(1, 'admin', '123'),
-	(2, 'tester', '123');
+	(2, 'tester', '123'),
+	(3, 'new', '123'),
+	(4, 'new2', '123'),
+	(5, 'qqq', 'saa');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

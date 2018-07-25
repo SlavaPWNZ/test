@@ -43,7 +43,7 @@ class MainController extends Controller
             $this->login    = addslashes($_GET['login']);
             $this->password = addslashes($_GET['password']);
         }
-        $result   = MainModel::AuthModel($this->login, $this->password);
+        $result = MainModel::AuthModel($this->login, $this->password);
         if (!isset($result))
             $result['error'] = "invalid args";
         return json_encode($result, JSON_UNESCAPED_UNICODE);
@@ -55,7 +55,7 @@ class MainController extends Controller
             $this->name_new = addslashes($_GET['name_new']);
             $this->token    = addslashes($_GET['token']);
         }
-        $result   = MainModel::CreateCategoryModel($this->name_new, $this->token);
+        $result = MainModel::CreateCategoryModel($this->name_new, $this->token);
         if (!isset($result))
             $result['error'] = "invalid args";
         return json_encode($result, JSON_UNESCAPED_UNICODE);
@@ -68,7 +68,7 @@ class MainController extends Controller
             $this->name_new = addslashes($_GET['name_new']);
             $this->token    = addslashes($_GET['token']);
         }
-        $result   = MainModel::ChangeCategoryModel($this->id, $this->name_new, $this->token);
+        $result = MainModel::ChangeCategoryModel($this->id, $this->name_new, $this->token);
         if (!isset($result))
             $result['error'] = "invalid args";
         return json_encode($result, JSON_UNESCAPED_UNICODE);
@@ -77,8 +77,8 @@ class MainController extends Controller
     public function deleteCategory()
     {
         if (isset($_GET['id']) && isset($_GET['token'])) {
-            $this->id     = addslashes($_GET['id']);
-            $this->token  = addslashes($_GET['token']);
+            $this->id    = addslashes($_GET['id']);
+            $this->token = addslashes($_GET['token']);
         }
         $result = MainModel::DeleteCategoryModel($this->id, $this->token);
         if (!isset($result))
@@ -93,7 +93,7 @@ class MainController extends Controller
             $this->ids_categories_new = addslashes($_GET['ids_categories_new']);
             $this->token              = addslashes($_GET['token']);
         }
-        $result             = MainModel::CreateItemModel($this->name_new, $this->ids_categories_new, $this->token);
+        $result = MainModel::CreateItemModel($this->name_new, $this->ids_categories_new, $this->token);
         if (!isset($result))
             $result['error'] = "invalid args";
         return json_encode($result, JSON_UNESCAPED_UNICODE);
@@ -107,7 +107,7 @@ class MainController extends Controller
             $this->ids_categories_new = addslashes($_GET['ids_categories_new']);
             $this->token              = addslashes($_GET['token']);
         }
-        $result             = MainModel::ChangeItemModel($this->id, $this->name_new, $this->ids_categories_new, $this->token);
+        $result = MainModel::ChangeItemModel($this->id, $this->name_new, $this->ids_categories_new, $this->token);
         if (!isset($result))
             $result['error'] = "invalid args";
         return json_encode($result, JSON_UNESCAPED_UNICODE);
@@ -116,8 +116,8 @@ class MainController extends Controller
     public function deleteItem()
     {
         if (isset($_GET['id']) && isset($_GET['token'])) {
-            $this->id     = addslashes($_GET['id']);
-            $this->token  = addslashes($_GET['token']);
+            $this->id    = addslashes($_GET['id']);
+            $this->token = addslashes($_GET['token']);
         }
         $result = MainModel::DeleteItemModel($this->id, $this->token);
         if (!isset($result))

@@ -99,7 +99,7 @@ class MainModel extends Model
     public static function CreateCategoryModel($name_new, $token)
     {
         try {
-            if ($name_new==null || $token==null) {
+            if ($name_new==null || $token==null || strlen($name_new)>50) {
                 $result['error'] = "invalid args";
                 return $result;
             }
@@ -208,7 +208,7 @@ class MainModel extends Model
     public static function CreateItemModel($name_new, $ids_categories_new, $token)
     {
         try {
-            if ($name_new==null || $ids_categories_new==null || $token==null) {
+            if ($name_new==null || $ids_categories_new==null || $token==null || strlen($name_new)>50) {
                 $result['error'] = "invalid args";
                 return $result;
             }
@@ -319,7 +319,7 @@ class MainModel extends Model
     public static function CreateUserModel($login, $password)
     {
         try {
-            if ($login==null || $password==null) {
+            if ($login==null || $password==null || strlen($login)>20 || strlen($password)>20) {
                 $result['error'] = "invalid args";
                 return $result;
             }
