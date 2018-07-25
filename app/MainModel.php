@@ -30,6 +30,10 @@ class MainModel extends Model
     public static function GetItemsModel($id)
     {
         try {
+            if ($id==null) {
+                $result['error'] = "invalid args";
+                return $result;
+            }
             $result1 = DB::table('category')->where('id', '=', $id)->get();
             if (!empty($result1)) {
                 $result2 = DB::table('ratio_category_items')->where('id_category', '=', $id)->get();
@@ -68,6 +72,10 @@ class MainModel extends Model
     public static function AuthModel($login, $password)
     {
         try {
+            if ($login==null || $password==null) {
+                $result['error'] = "invalid args";
+                return $result;
+            }
             $result1 = DB::table('users')->where([['login', '=', $login],['password', '=', $password]])->get();
             if (!empty($result1)) {
                 $time           = Carbon::now();
@@ -91,6 +99,10 @@ class MainModel extends Model
     public static function CreateCategoryModel($name_new, $token)
     {
         try {
+            if ($name_new==null || $token==null) {
+                $result['error'] = "invalid args";
+                return $result;
+            }
             $time = Carbon::now()->subHour();
             $result1 = DB::table('tokens')->where([['token', '=', $token],['date', '>', $time]])->get();
             if (!empty($result1)) {
@@ -121,6 +133,10 @@ class MainModel extends Model
     public static function ChangeCategoryModel($id, $name_new, $token)
     {
         try {
+            if ($id==null || $name_new==null || $token==null) {
+                $result['error'] = "invalid args";
+                return $result;
+            }
             $time = Carbon::now()->subHour();
             $result1 = DB::table('tokens')->where([['token', '=', $token],['date', '>', $time]])->get();
             if (!empty($result1)) {
@@ -158,6 +174,10 @@ class MainModel extends Model
     public static function DeleteCategoryModel($id, $token)
     {
         try {
+            if ($id==null || $token==null) {
+                $result['error'] = "invalid args";
+                return $result;
+            }
             $time = Carbon::now()->subHour();
             $result1 = DB::table('tokens')->where([['token', '=', $token],['date', '>', $time]])->get();
             if (!empty($result1)) {
@@ -188,6 +208,10 @@ class MainModel extends Model
     public static function CreateItemModel($name_new, $ids_categories_new, $token)
     {
         try {
+            if ($name_new==null || $ids_categories_new==null || $token==null) {
+                $result['error'] = "invalid args";
+                return $result;
+            }
             $ids_categories_new = preg_split("/,/", $ids_categories_new);
             $size               = count($ids_categories_new);
             $time               = Carbon::now()->subHour();
@@ -219,6 +243,10 @@ class MainModel extends Model
     public static function ChangeItemModel($id, $name_new, $ids_categories_new, $token)
     {
         try {
+            if ($id==null || $name_new==null || $ids_categories_new==null || $token==null) {
+                $result['error'] = "invalid args";
+                return $result;
+            }
             $ids_categories_new = preg_split("/,/", $ids_categories_new);
             $size               = count($ids_categories_new);
             $time               = Carbon::now()->subHour();
@@ -257,6 +285,10 @@ class MainModel extends Model
     public static function DeleteItemModel($id, $token)
     {
         try {
+            if ($id==null || $token==null) {
+                $result['error'] = "invalid args";
+                return $result;
+            }
             $time = Carbon::now()->subHour();
             $result1 = DB::table('tokens')->where([['token', '=', $token],['date', '>', $time]])->get();
             if (!empty($result1)) {
@@ -287,6 +319,10 @@ class MainModel extends Model
     public static function CreateUserModel($login, $password)
     {
         try {
+            if ($login==null || $password==null) {
+                $result['error'] = "invalid args";
+                return $result;
+            }
             $result1 = DB::table('users')->where('login', '=', $login)->get();
             if (empty($result1)) {
                 DB::table('users')->insert(['login' => $login, 'password' => $password]);
