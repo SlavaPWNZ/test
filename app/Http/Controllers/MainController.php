@@ -119,16 +119,4 @@ class MainController extends Controller
         echo json_encode($result, JSON_UNESCAPED_UNICODE);
     }
 
-    public function createUser()
-    {
-        if (isset($_GET['login']) && $_GET['login'] != '' && isset($_GET['password']) && $_GET['password'] != '') {
-            $login    = addslashes($_GET['login']);
-            $password = addslashes($_GET['password']);
-            $result   = MainModel::CreateUserModel($login, $password);
-        }
-        if (!isset($result))
-            $result['error'] = "invalid args";
-        echo json_encode($result, JSON_UNESCAPED_UNICODE);
-    }
-
 }

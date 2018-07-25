@@ -290,18 +290,18 @@ class MainModel extends Model
             $result1 = DB::table('users')->where('login', '=', $login)->get();
             if (empty($result1)) {
                 DB::table('users')->insert(['login' => $login, 'password' => $password]);
-                $result           = null;
-                $result['result'] = "user successfully created";
+                $result = null;
+                $result = "user successfully created";
                 return $result;
             } else {
-                $result          = null;
-                $result['error'] = "user with this login already created";
+                $result = null;
+                $result = "user with this login already created";
                 return $result;
             }
         }
         catch (\Illuminate\Database\QueryException $ex) {
-            $result          = null;
-            $result['error'] = "db tables errors";
+            $result = null;
+            $result = "db tables errors";
             return $result;
         }
     }
